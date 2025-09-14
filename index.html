@@ -1,0 +1,163 @@
+/*
+G D U - Get Dressed Up
+React + TailwindCSS + Framer Motion landing page
+
+Fixed version: removed syntax errors for TSX/JSX compatibility
+*/
+
+import React from 'react'
+import { motion } from 'framer-motion'
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-[#0b0d10] text-gray-200 antialiased">
+      <Header />
+      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <Hero />
+        <About />
+        <Services />
+        <Portfolio />
+        <Testimonials />
+        <CTA />
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+function Header() {
+  return (
+    <header className="w-full border-b border-gray-800">
+      <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between h-16">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-md bg-gradient-to-tr from-pink-600 to-indigo-600 flex items-center justify-center font-bold text-black">G D U</div>
+          <div className="font-semibold text-white">Get Dressed Up</div>
+        </div>
+        <div className="hidden md:flex items-center gap-6">
+          <a href="#services" className="text-sm hover:underline">Services</a>
+          <a href="#portfolio" className="text-sm hover:underline">Portfolio</a>
+          <a href="#contact" className="text-sm hover:underline">Contact</a>
+          <a href="#" className="ml-2 inline-block px-4 py-2 rounded-md bg-gradient-to-r from-pink-600 to-indigo-600 text-black font-medium hover:scale-105 transform transition">Work With Us</a>
+        </div>
+      </nav>
+    </header>
+  )
+}
+
+function Hero() {
+  return (
+    <section className="pt-12 pb-20 relative overflow-hidden">
+      <motion.div
+        aria-hidden
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="absolute inset-0 -z-10 bg-gradient-to-br from-[#071018] via-[#0b1220] to-[#081018]"
+      />
+
+      <div className="max-w-5xl mx-auto text-center">
+        <motion.h1 initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+          Get Dressed Up <span className="text-pink-400">(G D U)</span>
+        </motion.h1>
+
+        <motion.p initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mt-6 text-lg sm:text-xl max-w-2xl mx-auto text-gray-300">
+          <em>Transforming Brands, Elevating Presence.</em>
+        </motion.p>
+
+        <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mt-8 flex justify-center gap-4">
+          <a href="#contact" className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-600 to-indigo-600 text-black font-semibold shadow-lg hover:scale-105 transform transition">Work With Us</a>
+          <a href="#portfolio" className="px-6 py-3 rounded-full border border-gray-700 text-sm text-gray-200 hover:bg-gray-800/60">View Portfolio</a>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+function About() {
+  return (
+    <section id="about" className="py-12">
+      <div className="max-w-4xl mx-auto text-center">
+        <motion.h2 initial={{ opacity: 0, y: 6 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-2xl font-bold">About G D U</motion.h2>
+        <motion.p whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 6 }} className="mt-4 text-gray-300">
+          We are a boutique marketing agency focused on creative strategy, measurable growth, and premium brand experiences.
+        </motion.p>
+      </div>
+    </section>
+  )
+}
+
+function Services() {
+  const services = [
+    { title: 'Brand Strategy', emoji: '🎨', desc: 'Positioning, naming, identity systems.' },
+    { title: 'Social Media', emoji: '📱', desc: 'Content, community & influencer programs.' },
+    { title: 'Paid Ads', emoji: '💳', desc: 'Performance campaigns across channels.' },
+    { title: 'SEO', emoji: '🔎', desc: 'Technical & content SEO that drives growth.' },
+    { title: 'Content Creation', emoji: '🎬', desc: 'High-quality assets & storytelling.' }
+  ]
+
+  return (
+    <section id="services" className="py-12">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-2xl font-bold">Our Services</h2>
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((s, i) => (
+            <motion.div key={i} whileHover={{ scale: 1.05 }} className="p-6 bg-[#0e1114] border border-gray-800 rounded-xl">
+              <div className="text-3xl mb-2">{s.emoji}</div>
+              <h3 className="font-semibold text-lg">{s.title}</h3>
+              <p className="mt-2 text-gray-300 text-sm">{s.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Portfolio() {
+  return (
+    <section id="portfolio" className="py-12">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-2xl font-bold">Selected Case Studies</h2>
+        <p className="text-gray-400">Replace with real project examples.</p>
+      </div>
+    </section>
+  )
+}
+
+function Testimonials() {
+  return (
+    <section id="testimonials" className="py-12">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-2xl font-bold">What Clients Say</h2>
+        <blockquote className="mt-6 text-gray-300 italic">“Great results and professional team.”</blockquote>
+      </div>
+    </section>
+  )
+}
+
+function CTA() {
+  return (
+    <section id="contact" className="py-12">
+      <div className="max-w-4xl mx-auto text-center p-8 rounded-xl bg-gradient-to-tr from-white/5 to-white/10 border border-gray-800">
+        <h2 className="text-2xl font-bold">Ready to Dress Up Your Brand?</h2>
+        <p className="mt-3 text-gray-300">Book a free consultation with our team.</p>
+        <a href="mailto:hello@getdressedup.com" className="mt-6 inline-block px-6 py-3 rounded-full bg-pink-500 text-black font-semibold">Book a Free Consultation</a>
+      </div>
+    </section>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="mt-12 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-md bg-gradient-to-tr from-pink-600 to-indigo-600 flex items-center justify-center font-bold text-black">G D U</div>
+          <div className="font-semibold text-white">Get Dressed Up</div>
+        </div>
+        <div className="flex items-center gap-3 mt-4 md:mt-0">
+          <a href="https://www.facebook.com/getdressedupctg" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-pink-400">Facebook</a>
+        </div>
+      </div>
+    </footer>
+  )
+}
