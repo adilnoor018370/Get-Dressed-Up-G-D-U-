@@ -1,0 +1,243 @@
+import React from 'react'
+import { motion } from 'framer-motion'
+
+type Service = { title: string; desc: string }
+type Project = { title: string; img: string; desc: string }
+type Review = { quote: string; name: string; role: string }
+
+const SERVICES: Service[] = [
+  { title: 'Brand Strategy', desc: 'Positioning, naming, identity systems.' },
+  { title: 'Social Media', desc: 'Content, community & influencer programs.' },
+  { title: 'Paid Ads', desc: 'Performance campaigns across channels.' },
+  { title: 'SEO', desc: 'Technical & content SEO that drives organic growth.' },
+  { title: 'Content Creation', desc: 'High-quality assets & storytelling.' }
+]
+
+const PROJECTS: Project[] = [
+  { title: 'Fashion Launch', img: 'https://images.unsplash.com/photo-1520975918577-56f1f8a3a6d3?auto=format&fit=crop&w=1200&q=60', desc: 'Multi-channel campaign that increased conversions.' },
+  { title: 'Local Retail Brand', img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=60', desc: 'Full rebrand & social strategy.' },
+  { title: 'Ecomm Growth', img: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1200&q=60', desc: 'Paid ads optimization and scaling.' }
+]
+
+const REVIEWS: Review[] = [
+  { quote: 'G D U transformed our online presence and sales doubled in 6 months.', name: 'Aisha Rahman', role: 'Founder, Fashion Co.' },
+  { quote: 'Professional, creative, and data-driven — highly recommend.', name: 'Michael Tan', role: 'MD, Retail Group' },
+  { quote: 'They feel like part of our team and deliver consistent results.', name: 'Sara Ali', role: 'CMO, Ecomm' }
+]
+
+const App: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-[#0b0d10] text-gray-200 antialiased">
+      <Header />
+      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <Hero />
+        <About />
+        <Services />
+        <Portfolio />
+        <Testimonials />
+        <CTA />
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+export default App
+
+// ---------- Components ----------
+const Header: React.FC = () => (
+  <header className="w-full border-b border-gray-800">
+    <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between h-16">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-md bg-gradient-to-tr from-pink-600 to-indigo-600 flex items-center justify-center font-bold text-black">G D U</div>
+        <div className="font-semibold text-white">Get Dressed Up</div>
+      </div>
+      <div className="hidden md:flex items-center gap-6">
+        <a href="#services" className="text-sm hover:underline">Services</a>
+        <a href="#portfolio" className="text-sm hover:underline">Portfolio</a>
+        <a href="#contact" className="text-sm hover:underline">Contact</a>
+        <a href="#" className="ml-2 inline-block px-4 py-2 rounded-md bg-gradient-to-r from-pink-600 to-indigo-600 text-black font-medium hover:scale-105 transform transition">Work With Us</a>
+      </div>
+    </nav>
+  </header>
+)
+
+const Hero: React.FC = () => (
+  <section className="pt-12 pb-20 relative overflow-hidden">
+    <motion.div
+      aria-hidden={true}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="absolute inset-0 -z-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+    />
+
+    <div className="max-w-5xl mx-auto text-center">
+      <motion.h1 initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+        Get Dressed Up <span className="text-pink-400">(G D U)</span>
+      </motion.h1>
+
+      <motion.p initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mt-6 text-lg sm:text-xl max-w-2xl mx-auto text-gray-300">
+        <em>Transforming Brands, Elevating Presence.</em>
+      </motion.p>
+
+      <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mt-8 flex justify-center gap-4">
+        <a href="#contact" className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-600 to-indigo-600 text-black font-semibold shadow-lg hover:scale-105 transform transition">Work With Us</a>
+        <a href="#portfolio" className="px-6 py-3 rounded-full border border-gray-700 text-sm text-gray-200 hover:bg-gray-800/60">View Portfolio</a>
+      </motion.div>
+    </div>
+  </section>
+)
+
+const About: React.FC = () => (
+  <section id="about" className="py-12">
+    <div className="max-w-4xl mx-auto text-center">
+      <motion.h2 initial={{ opacity: 0, y: 6 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-2xl font-bold">About G D U</motion.h2>
+      <motion.p whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 6 }} className="mt-4 text-gray-300">
+        We are a boutique marketing agency focused on creative strategy, measurable growth, and premium brand experiences. We combine storytelling with data to build campaigns that convert and brands that last.
+      </motion.p>
+
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <FeatureCard icon={'⭐'} title={'Creative Strategy'} text={'Brand-led campaigns rooted in insight.'} />
+        <FeatureCard icon={'📈'} title={'Performance Focused'} text={'Growth strategies with measurable ROI.'} />
+        <FeatureCard icon={'🤝'} title={'Collaborative'} text={'Your team becomes our team—transparent and agile.'} />
+      </div>
+    </div>
+  </section>
+)
+
+const FeatureCard: React.FC<{ icon: string; title: string; text: string }> = ({ icon, title, text }) => (
+  <div className="bg-gradient-to-tr from-gray-800 to-gray-900 border border-gray-800 p-6 rounded-xl">
+    <div className="text-2xl mb-3">{icon}</div>
+    <h3 className="font-semibold">{title}</h3>
+    <p className="mt-2 text-sm text-gray-300">{text}</p>
+  </div>
+)
+
+const Services: React.FC = () => (
+  <section id="services" className="py-12">
+    <div className="max-w-6xl mx-auto text-center">
+      <h2 className="text-2xl font-bold">Our Services</h2>
+      <p className="text-gray-400 text-center mt-2 max-w-2xl mx-auto">Tailored services to grow your audience and revenue.</p>
+
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {SERVICES.map((s, i) => (
+          <article key={i} className="p-6 bg-gray-900 border border-gray-800 rounded-xl hover:scale-105 transform transition">
+            <div className="text-3xl mb-3">{getServiceEmoji(s.title)}</div>
+            <h3 className="font-semibold text-lg">{s.title}</h3>
+            <p className="mt-2 text-gray-300 text-sm">{s.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
+function getServiceEmoji(title: string): string {
+  switch (title) {
+    case 'Brand Strategy': return '🎨'
+    case 'Social Media': return '📱'
+    case 'Paid Ads': return '💳'
+    case 'SEO': return '🔎'
+    case 'Content Creation': return '🎬'
+    default: return '🔧'
+  }
+}
+
+const Portfolio: React.FC = () => (
+  <section id="portfolio" className="py-12">
+    <div className="max-w-6xl mx-auto">
+      <h2 className="text-2xl font-bold text-center">Selected Case Studies</h2>
+      <p className="text-gray-400 text-center mt-2">Real work, real results. Click a case to learn more.</p>
+
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {PROJECTS.map((p, i) => (
+          <ProjectCard key={i} project={p} />
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
+const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
+  <div className="rounded-xl overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900 border border-gray-800 shadow-sm hover:scale-105 transform transition">
+    <div className="h-44 bg-gray-900">
+      <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
+    </div>
+    <div className="p-4">
+      <h3 className="font-semibold">{project.title}</h3>
+      <p className="mt-2 text-sm text-gray-300">{project.desc}</p>
+      <div className="mt-4">
+        <a href="#" className="text-sm font-medium text-pink-400 hover:underline">View Case Study →</a>
+      </div>
+    </div>
+  </div>
+)
+
+const Testimonials: React.FC = () => {
+  const [index, setIndex] = React.useState<number>(0)
+
+  React.useEffect(() => {
+    const t = setInterval(() => setIndex(i => (i + 1) % REVIEWS.length), 5000)
+    return () => clearInterval(t)
+  }, [])
+
+  return (
+    <section id="testimonials" className="py-12">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-2xl font-bold">What Clients Say</h2>
+        <div className="mt-6 bg-gray-900 border border-gray-800 rounded-xl p-6">
+          <motion.blockquote key={index} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 80 }} className="text-gray-200 italic">“{REVIEWS[index].quote}”</motion.blockquote>
+          <div className="mt-4 flex items-center justify-center gap-3 text-sm text-gray-400">
+            <div className="font-semibold text-gray-100">{REVIEWS[index].name}</div>
+            <div>— {REVIEWS[index].role}</div>
+          </div>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            {REVIEWS.map((_, i) => (
+              <button key={i} type="button" onClick={() => setIndex(i)} aria-label={"Go to testimonial " + (i + 1)} className={i === index ? 'w-2 h-2 rounded-full bg-pink-400' : 'w-2 h-2 rounded-full bg-gray-600'} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const CTA: React.FC = () => (
+  <section id="contact" className="py-12">
+    <div className="max-w-4xl mx-auto text-center p-8 rounded-xl bg-gradient-to-tr from-gray-800 to-gray-900 border border-gray-800">
+      <h2 className="text-2xl font-bold">Ready to Dress Up Your Brand?</h2>
+      <p className="mt-3 text-gray-300">Book a free consultation with our team and let's discuss how to elevate your presence.</p>
+      <div className="mt-6">
+        <a href="mailto:hello@getdressedup.com" className="inline-block px-6 py-3 rounded-full bg-pink-500 text-black font-semibold">Book a Free Consultation</a>
+      </div>
+    </div>
+  </section>
+)
+
+const Footer: React.FC = () => (
+  <footer className="mt-12 border-t border-gray-800">
+    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div>
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-10 h-10 rounded-md bg-gradient-to-tr from-pink-600 to-indigo-600 flex items-center justify-center font-bold text-black">G D U</div>
+          <div className="font-semibold text-white">Get Dressed Up</div>
+        </div>
+        <div className="text-sm text-gray-400">hello@getdressedup.com • +880 1234 567890</div>
+      </div>
+
+      <nav className="flex gap-6">
+        <a href="#services" className="text-sm text-gray-300 hover:underline">Services</a>
+        <a href="#portfolio" className="text-sm text-gray-300 hover:underline">Portfolio</a>
+        <a href="#contact" className="text-sm text-gray-300 hover:underline">Contact</a>
+      </nav>
+
+      <div className="flex items-center gap-3">
+        <a href="https://www.facebook.com/getdressedupctg" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-2 rounded-md hover:bg-white/5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 4.99 3.66 9.12 8.44 9.93v-7.03H7.9v-2.9h2.54V9.75c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.76-1.61 1.54v1.84h2.74l-.44 2.9h-2.3V22c4.78-.81 8.44-4.94 8.44-9.93z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+)
